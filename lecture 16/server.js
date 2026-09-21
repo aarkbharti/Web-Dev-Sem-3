@@ -3,7 +3,7 @@ const morgan=require("morgan");
 const app=express();
 const port=3000;
 
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
 const logMiddleware=(req,res,next)=>{
     req.name="John Doe";
@@ -22,7 +22,7 @@ const apiCheckMiddleware=(req,res,next)=>{
 };
 
 app.use(logMiddleware);
-app.use(apiCheckMiddleware);
+// app.use(apiCheckMiddleware); ///global middleware
 
 
 app.get("/",(req,res)=>{
@@ -31,7 +31,7 @@ app.get("/",(req,res)=>{
     res.send("Hello World");
 });
 
-app.get("/data",(req,res)=>{
+app.get("/data",apiCheckMiddleware,(req,res)=>{   /// route level middleware
     console.log("Hello Data");
     res.json({
         city:"New York",
