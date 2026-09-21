@@ -3,15 +3,14 @@ const morgan=require("morgan");
 const app=express();
 const port=3000;
 
-app.use(morgan());
+app.use(morgan("dev"));
 
-// const logMiddleware=(req,res,next)=>{
-//     req.name="John Doe";
-//     console.log("Request url:",req.url,"req method:",req.method);
-//     "Time:",new Date().toLocaleString();
-//     // res.send("Hello from middleware");
-//     next();
-// };
+const logMiddleware=(req,res,next)=>{
+    req.name="John Doe";
+    console.log("Request url:",req.url,"req method:",req.method);
+    console.log("Time:",new Date().toLocaleString());
+    next();
+};
 
 const apiCheckMiddleware=(req,res,next)=>{
     if(req.query.API_KEY==="12345"){
@@ -36,7 +35,7 @@ app.get("/data",(req,res)=>{
     console.log("Hello Data");
     res.json({
         city:"New York",
-        country:"USA"
+        country:"USA",
         temp:"25C",
         humidity:"60%"
     });
