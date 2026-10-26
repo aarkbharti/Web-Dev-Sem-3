@@ -31,4 +31,14 @@ app.listen(PORT, () => console.log("Server is running on port 3000"));
 
 
 
-//bla bla
+
+
+app.listen(PORT, () =>{
+    console.log(`server is running on http://localhost:${port}`);
+})
+
+
+
+
+
+
